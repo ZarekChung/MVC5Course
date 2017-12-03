@@ -14,8 +14,9 @@ namespace MVC5Course.Controllers
         // GET: Test
         public ActionResult Index()
         {
-			var data = repo.All().Where(p=>p.isDeleted==false);
-            return View(data.Take(10));
+			var data = repo.GetAllProductTop15();
+
+			return View(data);
         }
 
 		public ActionResult Create()

@@ -10,6 +10,16 @@ namespace MVC5Course.Models
 		{
 			return this.All().FirstOrDefault(p => p.ProductId == Id);
 		}
+
+		public IQueryable<Product> GetAllProduct()
+		{
+			return this.All().Where(p => p.isDeleted == false);
+		}
+
+		public IQueryable<Product> GetAllProductTop15()
+		{
+			return this.All().Where(p => p.isDeleted == false).Take(15);
+		}
 	}
 
 	public  interface IProductRepository : IRepository<Product>
