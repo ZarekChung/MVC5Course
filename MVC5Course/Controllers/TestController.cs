@@ -10,16 +10,12 @@ namespace MVC5Course.Controllers
     public class TestController : Controller
     {
 		FabricsEntities db = new FabricsEntities();
-
+		ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Test
         public ActionResult Index()
         {
-			var repo = new ProductRepository();
-			repo.UnitOfWork = new EFUnitOfWork();
-			
 			var data = repo.All().Where(p=>p.isDeleted==false);
-
             return View(data.Take(10));
         }
 
