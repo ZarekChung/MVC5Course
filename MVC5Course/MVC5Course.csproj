@@ -182,8 +182,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ARController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MBController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -280,6 +283,7 @@
     <Compile Include="ViewModels\ProductListVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Koala.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -387,9 +391,12 @@
     <Content Include="Views\Test\Edit.cshtml" />
     <Content Include="Views\Test\Details.cshtml" />
     <Content Include="Views\Test\Delete.cshtml" />
+    <Content Include="Views\AR\Index.cshtml" />
+    <Content Include="Views\Shared\JsAlertRedirect.cshtml" />
+    <Content Include="Views\MB\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

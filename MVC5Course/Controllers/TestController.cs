@@ -7,10 +7,8 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
-    public class TestController : Controller
+    public class TestController : BaseController
     {
-		ProductRepository repo = RepositoryHelper.GetProductRepository();
-
         // GET: Test
         public ActionResult Index()
         {
@@ -59,6 +57,8 @@ namespace MVC5Course.Controllers
 				item.OrderLine = data.OrderLine;
 
 				repo.UnitOfWork.Commit();
+
+				TempData["ProductItem"] = item;
 				return RedirectToAction("Index");
 			}
 
@@ -70,7 +70,7 @@ namespace MVC5Course.Controllers
 			var data = repo.Find(Id);
 			if (data == null)
 			{
-				return RedirectToAction("Index");
+				return HttpNotFound();
 			}
 			return View(data);
 		}
