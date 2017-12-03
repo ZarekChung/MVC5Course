@@ -52,10 +52,12 @@ namespace MVC5Course.Controllers
 			if (ModelState.IsValid)
 			{
 				var item = repo.Find(data.ProductId);
+
 				item.ProductName = data.ProductName;
 				item.Price = data.Price;
 				item.Stock = data.Stock;
 				item.OrderLine = data.OrderLine;
+
 				repo.UnitOfWork.Commit();
 				return RedirectToAction("Index");
 			}
@@ -66,15 +68,25 @@ namespace MVC5Course.Controllers
 		public ActionResult Details(int Id)
 		{
 			var data = repo.Find(Id);
+			if (data == null)
+			{
+				return RedirectToAction("Index");
+			}
 			return View(data);
 		}
 
 		public ActionResult Delete(int Id)
 		{
-		
 			var item = repo.Find(Id);
-			
-			item.isDeleted = true;
+			//var olRepo = RepositoryHelper.GetOrderRepository(repo.UnitOfWork);
+			//olRepo.Delete(olRepo.All().First(p => p.OrderId == 1));
+
+			//var olRepo = new OrderLineRepository();
+			//olRepo.UnitOfWork = repo.UnitOfWork;
+			//olRepo.Delete(olRepo.All().First(p => p.OrderId == 1));
+
+			//item.isDeleted = true;
+			repo.Delete(item);
 			repo.UnitOfWork.Commit();
 
 			return RedirectToAction("Index");

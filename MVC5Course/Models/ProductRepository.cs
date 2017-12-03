@@ -25,6 +25,11 @@ namespace MVC5Course.Models
 		{
 			return this.All().Take(15);
 		}
+
+		public override void Delete(Product entity)
+		{
+			entity.isDeleted = true;
+		}
 	}
 
 	public  interface IProductRepository : IRepository<Product>
