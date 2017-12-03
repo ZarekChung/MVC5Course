@@ -9,7 +9,6 @@ namespace MVC5Course.Controllers
 {
     public class TestController : Controller
     {
-		FabricsEntities db = new FabricsEntities();
 		ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Test
@@ -31,8 +30,8 @@ namespace MVC5Course.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				db.Product.Add(data);
-				db.SaveChanges();
+				repo.Add(data);
+				repo.UnitOfWork.Commit();
 				return RedirectToAction("Index");
 			}
 
@@ -40,7 +39,7 @@ namespace MVC5Course.Controllers
 		}
 		public ActionResult Edit(int Id)
 		{
-			var item = db.Product.Find(Id);
+			var item = repo.Find(Id);
 
 			return View(item);
 		}
@@ -51,12 +50,12 @@ namespace MVC5Course.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var item = db.Product.Find(data.ProductId);
+				var item = repo.Find(data.ProductId);
 				item.ProductName = data.ProductName;
 				item.Price = data.Price;
 				item.Stock = data.Stock;
 				item.OrderLine = data.OrderLine;
-				db.SaveChanges();
+				repo.UnitOfWork.Commit();
 				return RedirectToAction("Index");
 			}
 
@@ -65,18 +64,17 @@ namespace MVC5Course.Controllers
 
 		public ActionResult Details(int Id)
 		{
-			var data = db.Product.Find(Id);
+			var data = repo.Find(Id);
 			return View(data);
 		}
 
 		public ActionResult Delete(int Id)
 		{
 		
-			var item = db.Product.Find(Id);
-			//db.OrderLine.RemoveRange(item.OrderLine.ToList());
-			//db.Product.Remove(item);
+			var item = repo.Find(Id);
+			
 			item.isDeleted = true;
-			db.SaveChanges();
+			repo.UnitOfWork.Commit();
 
 			return RedirectToAction("Index");
 		}
