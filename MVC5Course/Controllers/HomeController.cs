@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.ActionFilters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,19 +9,20 @@ namespace MVC5Course.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+		[ShareDataAttrubute]
+		public ActionResult Index()
         {
             return View();
         }
-
+		[ShareDataAttrubute]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            //ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
-        public ActionResult Contact()
+		[ShareDataAttrubute]
+		public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
