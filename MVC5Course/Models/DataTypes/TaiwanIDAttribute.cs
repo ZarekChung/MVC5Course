@@ -21,7 +21,7 @@ namespace MVC5Course.Models.DataTypes
 
 			string str = (string)value;
 
-			if(str.Contains("product"))
+			if(str.Contains("fabric"))
 			{
 				return true;
 			}
