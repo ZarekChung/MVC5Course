@@ -28,6 +28,7 @@ namespace MVC5Course.Controllers
         }
 
 		[HttpPost]
+		[HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
 		//[ValidateAntiForgeryToken]
 		public ActionResult Index(MbViewModel[] batch)
 		{
@@ -35,19 +36,15 @@ namespace MVC5Course.Controllers
 			{
 				foreach (var item in batch)
 				{
-					try
-					{
+			
 					var one = repo.Find(item.ProductId);
 					one.Price = item.Price;
 					one.Stock = item.Stock;
 					one.Active = item.Active;
 					
 						repo.UnitOfWork.Commit();
-					}
-					catch (DbEntityValidationException ex)
-					{
-						throw;
-					}
+					
+					
 					
 				}
 				return RedirectToAction("Index");
