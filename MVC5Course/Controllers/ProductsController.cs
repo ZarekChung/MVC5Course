@@ -53,7 +53,22 @@ namespace MVC5Course.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            return View();
+			/*
+			var items = new List<SelectListItem>();
+			items.Add(new SelectListItem() { Value = "0", Text = "0" });
+			items.Add(new SelectListItem() { Value = "1", Text = "1" });
+			items.Add(new SelectListItem() { Value = "2", Text = "2" });
+
+			ViewBag.Price = items;
+			*/
+			var price_list = (from p in db.Product
+							  select new
+							  {
+								  Value = p.Price,
+								  Text = p.Price
+							  }).Distinct().OrderBy(p => p.Value);
+			ViewBag.Price = new SelectList(price_list,"Value","Text");
+			return View();
         }
 
         // POST: Products/Create
@@ -85,7 +100,16 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+			var price_list = (from p in db.Product
+							  select new
+							  {
+								  Value = p.Price,
+								  Text = p.Price
+							  }).Distinct().OrderBy(p => p.Value);
+			ViewBag.Price = new SelectList(price_list, "Value", "Text", product.Price);
+			
+
+			return View(product);
         }
 
         // POST: Products/Edit/5
