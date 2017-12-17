@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using MVC5Course.ViewModels;
+using MVC5Course.ActionFilters;
 
 namespace MVC5Course.Controllers
 {
@@ -51,23 +52,9 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Products/Create
+		[DropDownListAttribute]
         public ActionResult Create()
         {
-			/*
-			var items = new List<SelectListItem>();
-			items.Add(new SelectListItem() { Value = "0", Text = "0" });
-			items.Add(new SelectListItem() { Value = "1", Text = "1" });
-			items.Add(new SelectListItem() { Value = "2", Text = "2" });
-
-			ViewBag.Price = items;
-			*/
-			var price_list = (from p in db.Product
-							  select new
-							  {
-								  Value = p.Price,
-								  Text = p.Price
-							  }).Distinct().OrderBy(p => p.Value);
-			ViewBag.Price = new SelectList(price_list,"Value","Text");
 			return View();
         }
 
@@ -76,7 +63,8 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+		[DropDownListAttribute]
+		public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -84,18 +72,12 @@ namespace MVC5Course.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-			var price_list = (from p in db.Product
-							  select new
-							  {
-								  Value = p.Price,
-								  Text = p.Price
-							  }).Distinct().OrderBy(p => p.Value);
-			ViewBag.Price = new SelectList(price_list, "Value", "Text");
 			return View(product);
         }
 
-        // GET: Products/Edit/5
-        public ActionResult Edit(int? id)
+		// GET: Products/Edit/5
+		[DropDownListAttribute]
+		public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -106,14 +88,6 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
-			var price_list = (from p in db.Product
-							  select new
-							  {
-								  Value = p.Price,
-								  Text = p.Price
-							  }).Distinct().OrderBy(p => p.Value);
-			ViewBag.Price = new SelectList(price_list, "Value", "Text");
-			
 
 			return View(product);
         }
@@ -123,6 +97,7 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
+		[DropDownListAttribute]
 		//public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
 		public ActionResult Edit(int id)
 		{
@@ -141,14 +116,6 @@ namespace MVC5Course.Controllers
 			   }
 			   return View(product);
 			   */
-			var price_list = (from p in db.Product
-							  select new
-							  {
-								  Value = p.Price,
-								  Text = p.Price
-							  }).Distinct().OrderBy(p => p.Value);
-			ViewBag.Price = new SelectList(price_list, "Value", "Text");
-
 			return View(product);
 		}
 
