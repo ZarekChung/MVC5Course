@@ -44,6 +44,10 @@
 
     </dl>
 </div>
+
+<h4>OrderLines for @Model.ProductName</h4>
+@Html.Partial("OrderLines", (Object)ViewBag.OrderLines)
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
     @Html.ActionLink("Back to List", "Index")

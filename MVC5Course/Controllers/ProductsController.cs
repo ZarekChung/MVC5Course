@@ -46,7 +46,8 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+			ViewBag.OrderLines = product.OrderLine.ToList();
+			return View(product);
         }
 
         // GET: Products/Create
