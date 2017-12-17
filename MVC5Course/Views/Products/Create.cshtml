@@ -29,8 +29,8 @@
                 @Html.DropDownListFor(model => model.Price, null, "--請選擇--", new { @class = "form-control" })
                 
                @* @Html.DropDownList("Price",null,"--請選擇--", new { @class = "form-control" })*@
-               @* @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })*@
+               @* @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
 
