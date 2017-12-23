@@ -62,10 +62,15 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientId }) |
+            @Ajax.ActionLink("Details", "Details", new { id=item.ClientId }, new AjaxOptions() { UpdateTargetId="main"}) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ClientId })
         </td>
     </tr>
 }
 
 </table>
+<div id="main"></div>
+
+@section Scripts {
+   <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    }
