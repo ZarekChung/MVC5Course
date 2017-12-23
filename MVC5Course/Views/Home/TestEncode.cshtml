@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.Security.Application
+
 @{
     ViewBag.Title = "TestEncode";
     var str = "<h1>Hello 哈囉 World</h1>";
@@ -38,7 +39,15 @@
 
 test";
 }
+<hr />
+
+<h3>AntiXSS </h3>
+@{
+    var xss = "<h1>Hello <script>alert('XSS');</script></h1>";
+}
+@Html.Raw(Encoder.HtmlEncode(xss))
+@Html.Raw(Sanitizer.GetSafeHtmlFragment(xss))
 
 <script>
-    alert('@Ajax.JavaScriptStringEncode(msg)');
+   // alert('@Ajax.JavaScriptStringEncode(msg)');
 </script>
