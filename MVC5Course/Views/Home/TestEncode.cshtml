@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "TestEncode";
+    var str = "<h1>Hello 哈囉 World</h1>";
+}
+
+<h2>TestEncode</h2>
+
+<h3>什麼都不加</h3>
+@str
+<hr />
+
+<h3>Html.Encode</h3>
+@Html.Encode(str)
+
+<hr />
+
+<h3>URL 不加任何encode</h3>
+<a href="/Home/TestEncode?html=@(str)">content</a>
+
+<hr />
+
+<h3>Url.Encode</h3>
+<a href="/Home/TestEncode?html=@Url.Encode(str)">content</a>
+<hr />
+
+
+<h3>UrlPathEncode</h3>
+@{
+    var path = "/Home/";
+}
+<a href="@HttpUtility.UrlPathEncode(path)?html=@Url.Encode(str)">content</a>
+<hr />
+
+<h3>JavaScriptStringEncode</h3>
+@{ 
+    var msg = @"測試js
+
+test";
+}
+
+<script>
+    alert('@Ajax.JavaScriptStringEncode(msg)');
+</script>

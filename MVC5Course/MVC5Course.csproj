@@ -583,6 +583,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CreditRatingNew.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreditRating.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateOfBirth.cshtml" />
+    <Content Include="Views\Home\TestEncode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

@@ -40,5 +40,10 @@ namespace MVC5Course.Controllers
 
 			return View();
 		}
+
+		public ActionResult TestEncode()
+		{
+			return PartialView();
+		}
     }
 }
